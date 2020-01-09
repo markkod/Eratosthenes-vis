@@ -7,7 +7,7 @@ function eratosthenes(n) {
   var p = 2;
   var primeRange = range(p, n);
   while (p < n) {
-    primeRange = primeRange.filter((el => el === p || el % p !== 0)
+    primeRange = primeRange.filter(el => el === p || el % p !== 0)
     p = primeRange[primeRange.indexOf(p) + 1]
   }
   return primeRange
