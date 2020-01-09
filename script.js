@@ -6,17 +6,12 @@ const primeRange = (start, end) =>
 // needs to be made more efficient as each indexOf and filter operations is O(n)...
 function eratosthenes(n) {
   var p = 2;
-  const range = primeRange(p, n);
-  const primeIndices = new Array(range.length).fill(1);
-
+  var range = primeRange(p, n);
   while (p < n) {
-    primeIndices.forEach((_, idx) =>
-      range[idx] % p === 0 && range[idx] !== p ? (primeIndices[idx] = 0) : 1
-    );
-    p = range[primeIndices.indexOf(1, range.indexOf(p) + 1)];
+    range = range.filter((el, idx) => el === p || el % p !== 0)
+    p = range[range.indexOf(p) + 1]
   }
-
-  return range.filter((_, idx) => primeIndices[idx] !== 0);
+  return range
 }
 
 console.log(eratosthenes(50));
