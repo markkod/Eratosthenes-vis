@@ -1,16 +1,16 @@
-const primeRange = (start, end) =>
+const range = (start, end) =>
   Array(end - start + 1)
     .fill()
     .map((_, idx) => start + idx);
 
 function eratosthenes(n) {
   var p = 2;
-  var range = primeRange(p, n);
+  var primeRange = range(p, n);
   while (p < n) {
-    range = range.filter((el, idx) => el === p || el % p !== 0)
-    p = range[range.indexOf(p) + 1]
+    primeRange = primeRange.filter((el, idx) => el === p || el % p !== 0)
+    p = primeRange[primeRange.indexOf(p) + 1]
   }
-  return range
+  return primeRange
 }
 
 console.log(eratosthenes(50));
