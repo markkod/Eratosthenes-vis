@@ -1,0 +1,10 @@
+.NumbersTable {
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    border-width: 1;
+    border-style: solid;
+    border-color: #000d1a;
+    background-color: #cce6ff;
+    padding: 8px;
+}

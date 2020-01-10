@@ -1,0 +1,19 @@
+.NumberContainer {
+    display: flex;
+    flex-grow: 0;
+    margin: 4px;
+    height: 60px;
+    width: 60px;
+    justify-content: center;
+    background-color: #ffe6e6;
+}
+
+.ColoredNumberContainer {
+    display: flex;
+    flex-grow: 0;
+    margin: 4px;
+    height: 60px;
+    width: 60px;
+    justify-content: center;
+    background-color: #ff8080;
+}
