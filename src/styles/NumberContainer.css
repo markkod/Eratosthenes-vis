@@ -5,7 +5,9 @@
     height: 60px;
     width: 60px;
     justify-content: center;
-    /* background-color: #ffe6e6; */
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.04);
 }
 
 .ColoredNumberContainer {
@@ -27,4 +29,9 @@
     justify-content: center;
     background-color: #d819b8;
 }
-    /* background-color: #ff8080; */
+
+.NumberContainerIsPrime {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #272d2f;
+}

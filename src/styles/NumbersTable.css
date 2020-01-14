@@ -2,11 +2,12 @@
     display: flex;
     flex-wrap: wrap;
     flex-grow: 1;
-    border-width: 1;
+    border-width: 1px;
     border-style: solid;
     border-color: #000d1a;
-    background-color: #cce6ff;
+    background-color: rgba(204, 230, 255, 0.6);
     padding: 8px;
+    margin-bottom: 15px;
 }
 
 .NumbersTablePrimeNumber {
