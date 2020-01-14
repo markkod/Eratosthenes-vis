@@ -85,7 +85,7 @@ function NumbersTable(props) {
           const newItems = [...items];
 
           if (props.rangeEnd > 2) {
-            const firstPrime = newItems[1];
+            const firstPrime = newItems[0];
             const firstPrimeCopy = (
               <NumberContainer
                 key={firstPrime.props.key}
@@ -94,10 +94,11 @@ function NumbersTable(props) {
                 //isMarked={firstPrime.props.isMarked}
               />
             );
-            newItems[1] = firstPrimeCopy;
+            newItems[0] = firstPrimeCopy;
             //newItems.indexOf(2).props.isPrime = true;
           }
           if (l <= k) {
+              console.log("Checking for prime" + newItems[l].props)
             if (newItems[l].props.isMarked === false) {
               const primeNumber = newItems[2 * l + 1];
               console.log('Found prime number: ' + primeNumber)
