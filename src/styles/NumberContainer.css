@@ -17,3 +17,13 @@
     justify-content: center;
     background-color: #ff8080;
 }
+
+.MarkedNumberContainer {
+    display: flex;
+    flex-grow: 0;
+    margin: 4px;
+    height: 60px;
+    width: 60px;
+    justify-content: center;
+    background-color: #d819b8;
+}

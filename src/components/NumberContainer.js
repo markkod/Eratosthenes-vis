@@ -7,6 +7,10 @@ function NumberContainer(props) {
     if (props.isPrime) {
         containerClassName = "ColoredNumberContainer"
     }
+
+    if (props.isMarked) {
+        containerClassName = "MarkedNumberContainer"
+    }
  
     return (
         <div className={containerClassName}>

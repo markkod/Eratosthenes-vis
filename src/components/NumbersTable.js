@@ -61,18 +61,18 @@ function NumbersTable(props) {
           const newItems = [...items];
           for (var j = i; i + j + 2 * i * j <= k; j++) {
             const updateTargetItem = newItems[i + j + 2 * i * j];
-            const updateTargetItemCopy = (
-              <NumberContainer
-                key={updateTargetItem.key}
-                number={updateTargetItem.props.number}
-                isPrime={updateTargetItem.props.isPrime}
-                isMarked={true}
-              />
-            );
-            newItems[i + j + 2 * i * j] = updateTargetItemCopy;
-            console.log('newItems[i + j + 2 * i * j] props ----', newItems[i + j + 2 * i * j].props)
+            if (!updateTargetItem.props.isMarked) {
+                const updateTargetItemCopy = (
+                    <NumberContainer
+                      key={updateTargetItem.key}
+                      number={updateTargetItem.props.number}
+                      isPrime={updateTargetItem.props.isPrime}
+                      isMarked={true}
+                    />
+                  );
+                  newItems[i + j + 2 * i * j] = updateTargetItemCopy;
+            }
           }
-
           if (i === k) {
             setFinished(true);
           }
@@ -88,10 +88,10 @@ function NumbersTable(props) {
             const firstPrime = newItems[1];
             const firstPrimeCopy = (
               <NumberContainer
-                key={firstPrime.key}
-                number={firstPrime.number}
+                key={firstPrime.props.key}
+                number={firstPrime.props.number}
                 isPrime={true}
-                isMarked={firstPrime.isMarked}
+                //isMarked={firstPrime.props.isMarked}
               />
             );
             newItems[1] = firstPrimeCopy;
@@ -103,10 +103,10 @@ function NumbersTable(props) {
               console.log('Found prime number: ' + primeNumber)
               const primeNumberCopy = (
                 <NumberContainer
-                  key={primeNumber.key}
-                  number={primeNumber.number}
+                  key={primeNumber.props.key}
+                  number={primeNumber.props.number}
                   isPrime={true}
-                  isMarked={primeNumber.isMarked}
+                  isMarked={primeNumber.props.isMarked}
                 />
               );
               newItems[2 * l + 1] = primeNumberCopy;
