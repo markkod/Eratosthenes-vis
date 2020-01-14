@@ -1,13 +1,14 @@
 import React from 'react'
 import "../styles/NumberContainer.css"
 
-function NumberConatiner(props) {
+function NumberContainer(props) {
     let containerClassName = "NumberContainer"
 
     if (props.isPrime) {
         containerClassName = "ColoredNumberContainer"
     }
  
+    console.log('RERENDER NumberContainer!')
     return (
         <div className={containerClassName}>
             <h4 className="NumberText" >
@@ -17,4 +18,4 @@ function NumberConatiner(props) {
     )
 }
 
-export default NumberConatiner;
+export default NumberContainer;
