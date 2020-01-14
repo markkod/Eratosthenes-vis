@@ -18,7 +18,6 @@ function NumbersTable(props) {
 
   const [i, setI] = useState(1);
   const [l, setL] = useState(1);
-  const [sundaramFinished, setFinished] = useState(false);
 
   useEffect(() => {
     const itemsCopy = [];
@@ -33,7 +32,6 @@ function NumbersTable(props) {
         />
       );
     });
-    console.log(itemsCopy);
 
     setItems(itemsCopy);
     setP(2);
@@ -75,7 +73,7 @@ function NumbersTable(props) {
         }, 200);
       }
     } else if (props.algorithmName === ALGORITHMS.SUNDARAM) {
-      if (i <= k && !sundaramFinished) {
+      if (i <= k) {
         setTimeout(() => {
           const newItems = [...items];
 
@@ -99,7 +97,8 @@ function NumbersTable(props) {
           //     setFinished(true);
           //   }
         }, 200);
-      } else if (sundaramFinished) {
+      } else {
+        
         setTimeout(() => {
           const newItems = [...items];
           if (props.rangeEnd > 2) {
@@ -113,28 +112,28 @@ function NumbersTable(props) {
               />
             );
             newItems[1] = firstPrimeCopy;
-            //newItems.indexOf(2).props.isPrime = true;
           }
-          //console.log(newItems)
           if (l <= k) {
-            if (newItems[l].props.colour === null) {
-              console.log("l, prime: " + l);
-
-              /* SOMETHING FUCKED
-              const primeNumber = newItems[((2 * l) + 1)];
-              console.log('L: ' + l)
-              console.log("Found prime number: " + ((2 * l) + 1));
-              console.log("Item with index 2l+1: " + primeNumber.props.number)
-              const primeNumberCopy = (
-                <NumberContainer
-                  key={primeNumber.props.key}
-                  number={primeNumber.props.number}
-                  isPrime={true}
-                  colour={"MarkedNumberContainer"}
-                />
-              );
-              newItems[2 * l + 1] = primeNumberCopy;
-              newItems[2 * l + 1].props.isPrime = true; */
+            if (l === 1) {
+              console.log(newItems)
+              console.log(items)
+            }
+            if (l < newItems.length && !newItems[l].key.includes("Marked")) {
+              console.log("l, prime: " + (l+1));
+              
+              const index = 2 * l + 2;
+              if (index < newItems.length) {
+                const primeNumber = newItems[index];
+                const primeNumberCopy = (
+                  <NumberContainer
+                    key={primeNumber.key}
+                    number={primeNumber.props.number}
+                    isPrime={true}
+                  />
+                );
+                newItems[index] = primeNumberCopy;
+              }
+              
             }
           }
           setItems(newItems);
