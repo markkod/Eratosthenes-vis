@@ -18,6 +18,7 @@ function NumbersTable(props) {
 
   const [i, setI] = useState(1);
   const [l, setL] = useState(1);
+  const [sundaramFinished, setFinished] = useState(false);
 
   useEffect(() => {
     const itemsCopy = [];
@@ -74,11 +75,13 @@ function NumbersTable(props) {
         }, 200);
       }
     } else if (props.algorithmName === ALGORITHMS.SUNDARAM) {
-      setTimeout(() => {
-        if (i <= k) {
+      if (i <= k && !sundaramFinished) {
+        setTimeout(() => {
           const newItems = [...items];
 
           for (var j = i; i + j + 2 * i * j <= k; j++) {
+            // TODO: Should be maybe <= k
+
             const itemToUpdate = newItems[i + j + 2 * i * j - 1];
             newItems[i + j + 2 * i * j - 1] = (
               <NumberContainer
@@ -90,9 +93,14 @@ function NumbersTable(props) {
             );
             setItems(newItems);
           }
+
           setI(i + 1);
-    
-        } else {
+          //   if (i === k) {
+          //     setFinished(true);
+          //   }
+        }, 200);
+      } else if (sundaramFinished) {
+        setTimeout(() => {
           const newItems = [...items];
           if (props.rangeEnd > 2) {
             const firstPrime = newItems[1];
@@ -131,8 +139,8 @@ function NumbersTable(props) {
           }
           setItems(newItems);
           setL(l + 1);
-        }
-      }, 200);
+        }, 0);
+      }
     }
   }, [p, i, l]);
 
