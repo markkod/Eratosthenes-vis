@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/Eratosthenes-vis/precache-manifest.9f66ac66004d4727645d3de852a03f5f.js"
+  "/Eratosthenes-vis/precache-manifest.9dc61c07fb810e8ba7c69990c8787edb.js"
 );
 
 self.addEventListener('message', (event) => {
