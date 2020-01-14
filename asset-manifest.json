@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/Eratosthenes-vis/static/css/main.262383ed.chunk.css",
+    "main.js": "/Eratosthenes-vis/static/js/main.2fb3cc86.chunk.js",
+    "main.js.map": "/Eratosthenes-vis/static/js/main.2fb3cc86.chunk.js.map",
+    "runtime-main.js": "/Eratosthenes-vis/static/js/runtime-main.b4736547.js",
+    "runtime-main.js.map": "/Eratosthenes-vis/static/js/runtime-main.b4736547.js.map",
+    "static/js/2.83cff416.chunk.js": "/Eratosthenes-vis/static/js/2.83cff416.chunk.js",
+    "static/js/2.83cff416.chunk.js.map": "/Eratosthenes-vis/static/js/2.83cff416.chunk.js.map",
+    "index.html": "/Eratosthenes-vis/index.html",
+    "precache-manifest.9f66ac66004d4727645d3de852a03f5f.js": "/Eratosthenes-vis/precache-manifest.9f66ac66004d4727645d3de852a03f5f.js",
+    "service-worker.js": "/Eratosthenes-vis/service-worker.js",
+    "static/css/main.262383ed.chunk.css.map": "/Eratosthenes-vis/static/css/main.262383ed.chunk.css.map",
+    "static/js/2.83cff416.chunk.js.LICENSE": "/Eratosthenes-vis/static/js/2.83cff416.chunk.js.LICENSE"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b4736547.js",
+    "static/js/2.83cff416.chunk.js",
+    "static/css/main.262383ed.chunk.css",
+    "static/js/main.2fb3cc86.chunk.js"
+  ]
+}
