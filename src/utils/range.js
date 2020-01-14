@@ -5,7 +5,7 @@ export const getArrayOfRange = (start, end) =>
 
 
 export const ALGORITHMS = {
-  ERRATOSTHENES: "ERRATOSTHENES",
+  ERATOSTHENES: "ERATOSTHENES",
   EULER: "EULER",
   ATKINS: "ATKINS",
 }
