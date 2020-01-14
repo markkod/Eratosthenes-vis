@@ -11,7 +11,7 @@ function App() {
           Visualisation of algorithms
         </p>
       </header>
-      <TableWithInput algorithmName={ALGORITHMS.ERRATOSTHENES} />
+      <TableWithInput algorithmName={ALGORITHMS.ERATOSTHENES} />
       {/* <TableWithInput algorithmName={ALGORITHMS.EULER} />
       <TableWithInput algorithmName={ALGORITHMS.ATKINS} /> */}
     </div>

@@ -19,7 +19,7 @@ function TableWithInput() {
                 <button onClick={rangeEnd > 2 ? setShouldStartCalculating : () => {}}>Find prime numbers</button>
             </div>
             {shouldStartCalculating ? 
-                <NumbersTable rangeEnd={rangeEnd} algorithmName={ALGORITHMS.ERRATOSTHENES} />
+                <NumbersTable rangeEnd={rangeEnd} algorithmName={ALGORITHMS.ERATOSTHENES} />
             : null}
         </div>
     )
