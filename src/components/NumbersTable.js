@@ -96,7 +96,7 @@ function NumbersTable(props) {
       } else if (sundaramFinished) {
         setTimeout(() => {
           const newItems = [...items];
-
+          console.log('All items after algorithm has finished: ' + newItems)
           if (props.rangeEnd > 2) {
             const firstPrime = newItems[0];
             const firstPrimeCopy = (

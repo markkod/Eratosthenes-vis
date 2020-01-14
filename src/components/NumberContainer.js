@@ -10,20 +10,10 @@ function NumberContainer(props) {
     if (props.colour && element) {
       element.style.backgroundColor = props.colour;
     }
-<<<<<<< HEAD
 
-    if (props.isMarked) {
-        containerClassName = "MarkedNumberContainer"
-    }
- 
-    return (
-        <div className={containerClassName}>
-            <h4 className="NumberText" >
-                {props.number}
-            </h4>
-        </div>
-    )
-=======
+    //if (props.isMarked) {
+    //    containerClassName = "MarkedNumberContainer"
+    //}
   });
 
   return (
@@ -34,7 +24,6 @@ function NumberContainer(props) {
       <h4 className="NumberText">{props.number}</h4>
     </div>
   );
->>>>>>> d0f53f52076fcfec6d4cce6f81e762bf6303da2a
 }
 
 export default NumberContainer;
