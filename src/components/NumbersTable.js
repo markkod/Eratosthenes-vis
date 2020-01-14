@@ -96,7 +96,7 @@ function NumbersTable(props) {
           //   if (i === k) {
           //     setFinished(true);
           //   }
-        }, 200);
+        }, 100);
       } else {
         
         setTimeout(() => {
@@ -120,6 +120,15 @@ function NumbersTable(props) {
             }
             if (l < newItems.length && !newItems[l].key.includes("Marked")) {
               console.log("l, prime: " + (l+1));
+              const nr3 = newItems[2];
+              const nr3copy = (
+                  <NumberContainer
+                    key={nr3.key}
+                    number={nr3.props.number}
+                    isPrime={true}
+                  />
+              );
+              newItems[2] = nr3copy
               
               const index = 2 * l + 2;
               if (index < newItems.length) {
@@ -138,7 +147,7 @@ function NumbersTable(props) {
           }
           setItems(newItems);
           setL(l + 1);
-        }, 0);
+        }, 100);
       }
     }
   }, [p, i, l]);
