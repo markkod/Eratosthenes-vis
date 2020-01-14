@@ -49,7 +49,7 @@ function NumbersTable(props) {
         setPrimeRange(updatedPrimeRange);
         setP(newP);
       }
-    }
+    }d
   }, [items]);
 
   console.log("rerender", items);
