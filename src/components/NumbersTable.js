@@ -78,8 +78,6 @@ function NumbersTable(props) {
           const newItems = [...items];
 
           for (var j = i; i + j + 2 * i * j <= k; j++) {
-            // TODO: Should be maybe <= k
-
             const itemToUpdate = newItems[i + j + 2 * i * j - 1];
             newItems[i + j + 2 * i * j - 1] = (
               <NumberContainer
@@ -89,29 +87,26 @@ function NumbersTable(props) {
                 colour={"#6bef9a"}
               />
             );
-            setItems(newItems);
           }
 
+          setItems(newItems);
           setI(i + 1);
-          //   if (i === k) {
-          //     setFinished(true);
-          //   }
         }, 200);
       } else {
-        
         setTimeout(() => {
           const newItems = [...items];
           if (props.rangeEnd > 2) {
             const firstPrime = newItems[1];
-            const firstPrimeCopy = (
+
+            newItems[1] = (
               <NumberContainer
-                key={firstPrime.key}
+                key={`Prime-${firstPrime.props.number}`}
                 number={firstPrime.props.number}
                 isPrime={true}
-                colour={"MarkedNumberContainer"}
+                colour={firstPrime.props.colour}
               />
             );
-            newItems[1] = firstPrimeCopy;
+            setItems(newItems);
           }
           if (l <= k) {
             if (l === 1) {
@@ -126,19 +121,19 @@ function NumbersTable(props) {
                 const primeNumber = newItems[index];
                 const primeNumberCopy = (
                   <NumberContainer
-                    key={primeNumber.key}
+                    key={`Prime-${primeNumber.props.number}`}
                     number={primeNumber.props.number}
                     isPrime={true}
+                    colour={primeNumber.props.colour}
                   />
                 );
                 newItems[index] = primeNumberCopy;
               }
-              
             }
+            setItems(newItems);
+            setL(l + 1);
           }
-          setItems(newItems);
-          setL(l + 1);
-        }, 0);
+        }, 200);
       }
     }
   }, [p, i, l]);
