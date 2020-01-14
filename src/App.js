@@ -11,6 +11,7 @@ function App() {
       </header>
       <h1>Sieve of Eratosthenes</h1>
       <TableWithInput algorithmName={ALGORITHMS.ERATOSTHENES} />
+      <br></br>
       <h1>Sieve of Sundaram</h1>
       <TableWithInput algorithmName={ALGORITHMS.SUNDARAM} />
     </div>
