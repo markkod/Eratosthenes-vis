@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { map } from "lodash";
 import NumberContainer from "./NumberContainer";
-import { getArrayOfRange, ALGORITHMS } from "../utils/range";
+import { getArrayOfRange, ALGORITHMS, randomColour } from "../utils/range";
 import "../styles/NumbersTable.css";
 
 function NumbersTable(props) {
@@ -12,6 +12,7 @@ function NumbersTable(props) {
   const [i, setI] = useState(1);
   const [l, setL] = useState(1);
   const [sundaramFinished, setFinished] = useState(false);
+  const [primeNumbersArray, setPrimeNumbersArray] = useState([]);
 
   useEffect(() => {
     const itemsCopy = [];
@@ -22,7 +23,7 @@ function NumbersTable(props) {
           key={`Initial-${value}`}
           number={value}
           isPrime={false}
-          isMarked={false}
+          colour={null}
         />
       );
     });
@@ -36,17 +37,29 @@ function NumbersTable(props) {
     if (props.algorithmName === ALGORITHMS.ERATOSTHENES) {
       if (p < props.rangeEnd) {
         setTimeout(() => {
-          const newItems = [...items];
+          const colour = randomColour();
+          setPrimeNumbersArray([...primeNumbersArray, p]);
 
-          newItems[p - 2] = (
-            <NumberContainer key={p} number={p} isPrime={true} />
-          );
+          const newItems = map(items, item => {
+            const { props: itemProps } = item;
 
-          // Only the numbers that are not dividable by p can be prime numbers
+            if (itemProps.number === p || itemProps.number % p === 0) {
+              return (
+                <NumberContainer
+                  key={`Coloured-${itemProps.number}`}
+                  number={itemProps.number}
+                  isPrime={itemProps.number === p}
+                  colour={itemProps.colour || colour}
+                />
+              );
+            } else return item;
+          });
+
+          // Only the numbers that are not multiples of p can be prime numbers
           const updatedPrimeRange = primeRange.filter(
             i => i === p || i % p !== 0
           );
-          // New p will be the next so far undividable number (prime number)
+          // New p will be the next so far not multiple of p (prime number)
           const newP = updatedPrimeRange[updatedPrimeRange.indexOf(p) + 1];
 
           setItems(newItems);
@@ -121,8 +134,16 @@ function NumbersTable(props) {
     }
   }, [p, i, l]);
 
-  //console.log("rerender", items);
-  return <div className="NumbersTable">{items}</div>;
+  return (
+    <div>
+      <div className="NumbersTable">{items}</div>
+      <div>
+        {map(primeNumbersArray, n => (
+          <b className="NumbersTablePrimeNumber" >{n}</b>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 export default NumbersTable;
