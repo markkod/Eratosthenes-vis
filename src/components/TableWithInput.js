@@ -4,7 +4,7 @@ import NumbersTable from './NumbersTable'
 import '../styles/TableWithInput.css'
 
 function TableWithInput(props) {
-    const [rangeEnd, setRangeEnd] = useState(202);
+    const [rangeEnd, setRangeEnd] = useState(50);
     const [shouldStartCalculating, setShouldStartCalculating] = useState(false);
 
     return (

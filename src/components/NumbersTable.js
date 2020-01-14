@@ -23,7 +23,6 @@ function NumbersTable(props) {
           key={`Initial-${value}`}
           number={value}
           isPrime={false}
-          isMarked={false}
           colour={null}
         />
       );
@@ -74,27 +73,27 @@ function NumbersTable(props) {
       if (i <= k && !sundaramFinished) {
         setTimeout(() => {
           const newItems = [...items];
-          for (var j = i; (i + j + 2 * i * j) <= k; j++) {
-            const updateTargetItem = newItems[(i + j + 2 * i * j) - 1];
-            console.log("Setting number as marked: " + updateTargetItem.props.number);
+          for (var j = i; (i + j + 2 * i * j) < k; j++) {
+            const updateTargetItem = newItems[(i + j + 2 * i * j)];
+            console.log("marked: " + updateTargetItem.props.number)
             if (!updateTargetItem.props.isMarked) {
               const updateTargetItemCopy = (
                 <NumberContainer
                   key={updateTargetItem.key}
                   number={updateTargetItem.props.number}
                   isPrime={updateTargetItem.props.isPrime}
-                  isMarked={true}
+                  colour={"ColoredNumberContainer"}
                 />
               );
-              newItems[(i + j + 2 * i * j) - 1] = updateTargetItemCopy;
+              newItems[(i + j + 2 * i * j)] = updateTargetItemCopy;
             }
           }
+          setI(i + 1);
           if (i === k) {
             setFinished(true);
           } 
-          setI(i + 1);
-          
           setItems(newItems);
+          
         }, 0);
       } else if (sundaramFinished) {
         setTimeout(() => {
@@ -103,35 +102,52 @@ function NumbersTable(props) {
             const firstPrime = newItems[1];
             const firstPrimeCopy = (
               <NumberContainer
-                key={firstPrime.props.key}
+                key={firstPrime.key}
                 number={firstPrime.props.number}
                 isPrime={true}
-                isMarked={false}
+                colour={"MarkedNumberContainer"}
               />
             );
             newItems[1] = firstPrimeCopy;
             //newItems.indexOf(2).props.isPrime = true;
           }
+          //console.log(newItems)
           if (l <= k) {
-            if (newItems[l].props.isMarked === false) {
-              // SOMETHING FUCKED
-              const primeNumber = newItems[2 * l + 1];
-              console.log("Found prime number: " + primeNumber.props.number);
+            if (newItems[l].props.colour === null) {
+              console.log('l, prime: ' + (l))
+
+
+
+
+
+
+
+
+
+
+
+
+
+              /* SOMETHING FUCKED
+              const primeNumber = newItems[((2 * l) + 1)];
+              console.log('L: ' + l)
+              console.log("Found prime number: " + ((2 * l) + 1));
+              console.log("Item with index 2l+1: " + primeNumber.props.number)
               const primeNumberCopy = (
                 <NumberContainer
                   key={primeNumber.props.key}
                   number={primeNumber.props.number}
                   isPrime={true}
-                  isMarked={primeNumber.props.isMarked}
+                  colour={"MarkedNumberContainer"}
                 />
               );
               newItems[2 * l + 1] = primeNumberCopy;
-              //newItems[2 * l + 1].props.isPrime = true;
+              newItems[2 * l + 1].props.isPrime = true; */
             }
           }
           setItems(newItems);
           setL(l + 1);
-        }, 200);
+        }, 0);
       }
     }
   }, [p, i, l]);
