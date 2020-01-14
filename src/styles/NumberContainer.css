@@ -5,7 +5,7 @@
     height: 60px;
     width: 60px;
     justify-content: center;
-    background-color: #ffe6e6;
+    /* background-color: #ffe6e6; */
 }
 
 .ColoredNumberContainer {
@@ -15,5 +15,5 @@
     height: 60px;
     width: 60px;
     justify-content: center;
-    background-color: #ff8080;
+    /* background-color: #ff8080; */
 }
