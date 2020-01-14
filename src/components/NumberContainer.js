@@ -8,7 +8,6 @@ function NumberContainer(props) {
         containerClassName = "ColoredNumberContainer"
     }
  
-    console.log('RERENDER NumberContainer!')
     return (
         <div className={containerClassName}>
             <h4 className="NumberText" >

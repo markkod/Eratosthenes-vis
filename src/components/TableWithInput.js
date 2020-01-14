@@ -4,8 +4,7 @@ import NumbersTable from './NumbersTable'
 import { ALGORITHMS } from '../utils/range';
 import '../styles/TableWithInput.css'
 
-function TableWithInput() {
-
+function TableWithInput(props) {
     const [rangeEnd, setRangeEnd] = useState(50);
     const [shouldStartCalculating, setShouldStartCalculating] = useState(false);
 
@@ -19,7 +18,7 @@ function TableWithInput() {
                 <button onClick={rangeEnd > 2 ? setShouldStartCalculating : () => {}}>Find prime numbers</button>
             </div>
             {shouldStartCalculating ? 
-                <NumbersTable rangeEnd={rangeEnd} algorithmName={ALGORITHMS.ERATOSTHENES} />
+                <NumbersTable rangeEnd={rangeEnd} algorithmName={props.algorithmName} />
             : null}
         </div>
     )
