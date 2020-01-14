@@ -5,7 +5,7 @@ import { getArrayOfRange, ALGORITHMS, randomColour } from "../utils/range";
 import "../styles/NumbersTable.css";
 
 function NumbersTable(props) {
-  const range = getArrayOfRange(2, props.rangeEnd);
+  const range = getArrayOfRange(props.algorithmName === ALGORITHMS.SUNDARAM ? 1 : 2, props.rangeEnd);
   const [primeRange, setPrimeRange] = useState(range);
   const [items, setItems] = useState([]);
   const [p, setP] = useState(0);
@@ -23,10 +23,12 @@ function NumbersTable(props) {
           key={`Initial-${value}`}
           number={value}
           isPrime={false}
+          isMarked={false}
           colour={null}
         />
       );
     });
+    console.log(itemsCopy)
 
     setItems(itemsCopy);
     setP(2);
@@ -72,49 +74,49 @@ function NumbersTable(props) {
       if (i <= k && !sundaramFinished) {
         setTimeout(() => {
           const newItems = [...items];
-          for (var j = i; i + j + 2 * i * j <= k; j++) {
-            const updateTargetItem = newItems[i + j + 2 * i * j];
+          for (var j = i; (i + j + 2 * i * j) <= k; j++) {
+            const updateTargetItem = newItems[(i + j + 2 * i * j) - 1];
+            console.log("Setting number as marked: " + updateTargetItem.props.number);
             if (!updateTargetItem.props.isMarked) {
-                const updateTargetItemCopy = (
-                    <NumberContainer
-                      key={updateTargetItem.key}
-                      number={updateTargetItem.props.number}
-                      isPrime={updateTargetItem.props.isPrime}
-                      isMarked={true}
-                    />
-                  );
-                  newItems[i + j + 2 * i * j] = updateTargetItemCopy;
+              const updateTargetItemCopy = (
+                <NumberContainer
+                  key={updateTargetItem.key}
+                  number={updateTargetItem.props.number}
+                  isPrime={updateTargetItem.props.isPrime}
+                  isMarked={true}
+                />
+              );
+              newItems[(i + j + 2 * i * j) - 1] = updateTargetItemCopy;
             }
           }
           if (i === k) {
             setFinished(true);
-          }
-
+          } 
           setI(i + 1);
+          
           setItems(newItems);
-        }, 200);
+        }, 0);
       } else if (sundaramFinished) {
         setTimeout(() => {
           const newItems = [...items];
-          console.log('All items after algorithm has finished: ' + newItems)
           if (props.rangeEnd > 2) {
-            const firstPrime = newItems[0];
+            const firstPrime = newItems[1];
             const firstPrimeCopy = (
               <NumberContainer
                 key={firstPrime.props.key}
                 number={firstPrime.props.number}
                 isPrime={true}
-                //isMarked={firstPrime.props.isMarked}
+                isMarked={false}
               />
             );
-            newItems[0] = firstPrimeCopy;
+            newItems[1] = firstPrimeCopy;
             //newItems.indexOf(2).props.isPrime = true;
           }
           if (l <= k) {
-              console.log("Checking for prime" + newItems[l].props)
             if (newItems[l].props.isMarked === false) {
+              // SOMETHING FUCKED
               const primeNumber = newItems[2 * l + 1];
-              console.log('Found prime number: ' + primeNumber)
+              console.log("Found prime number: " + primeNumber.props.number);
               const primeNumberCopy = (
                 <NumberContainer
                   key={primeNumber.props.key}
@@ -139,7 +141,7 @@ function NumbersTable(props) {
       <div className="NumbersTable">{items}</div>
       <div>
         {map(primeNumbersArray, n => (
-          <b className="NumbersTablePrimeNumber" >{n}</b>
+          <b className="NumbersTablePrimeNumber">{n}</b>
         ))}
       </div>
     </div>

@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 
 import NumbersTable from './NumbersTable'
-import { ALGORITHMS } from '../utils/range';
 import '../styles/TableWithInput.css'
 
 function TableWithInput(props) {
-    const [rangeEnd, setRangeEnd] = useState(50);
+    const [rangeEnd, setRangeEnd] = useState(202);
     const [shouldStartCalculating, setShouldStartCalculating] = useState(false);
 
     return (
