@@ -5,7 +5,7 @@
     height: 60px;
     width: 60px;
     justify-content: center;
-    border-width: 1px;
+    border-width: 2px;
     border-style: solid;
     border-color: rgba(0, 0, 0, 0.04);
 }
@@ -31,7 +31,7 @@
 }
 
 .NumberContainerIsPrime {
-    border-width: 1px;
+    border-width: 2px;
     border-style: solid;
     border-color: #272d2f;
 }

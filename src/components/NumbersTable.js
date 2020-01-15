@@ -4,6 +4,8 @@ import NumberContainer from "./NumberContainer";
 import { getArrayOfRange, ALGORITHMS, randomColour } from "../utils/range";
 import "../styles/NumbersTable.css";
 
+const MARKED_COLOUR = "#6bef9a";
+
 function NumbersTable(props) {
   const k = (props.rangeEnd - 2) / 2;
   const range = getArrayOfRange(
@@ -17,7 +19,7 @@ function NumbersTable(props) {
   const [primeNumbersArray, setPrimeNumbersArray] = useState([]);
 
   const [i, setI] = useState(1);
-  const [l, setL] = useState(1);
+  const [l, setL] = useState(0);
 
   useEffect(() => {
     const itemsCopy = [];
@@ -25,7 +27,7 @@ function NumbersTable(props) {
     map(range, value => {
       itemsCopy.push(
         <NumberContainer
-          key={`Initial-${value}`}
+          key={`Initial-${props.algorithmName}-${value}`}
           number={value}
           isPrime={false}
           colour={null}
@@ -70,7 +72,7 @@ function NumbersTable(props) {
           setItems(newItems);
           setPrimeRange(updatedPrimeRange);
           setP(newP);
-        }, 200);
+        }, 400);
       }
     } else if (props.algorithmName === ALGORITHMS.SUNDARAM) {
       if (i <= k) {
@@ -84,7 +86,7 @@ function NumbersTable(props) {
                 key={`Marked-${itemToUpdate.props.number}`}
                 number={itemToUpdate.props.number}
                 isPrime={itemToUpdate.props.isPrime}
-                colour={"#6bef9a"}
+                colour={MARKED_COLOUR}
               />
             );
           }
@@ -109,28 +111,30 @@ function NumbersTable(props) {
             setItems(newItems);
           }
           if (l <= k) {
-            if (l === 1) {
-              console.log(newItems)
-              console.log(items)
+
+            if (newItems[l].props.colour !== MARKED_COLOUR) {
+              const indexValue = newItems[l].props.number;
+              const primeValue = 2 * indexValue + 1;
+
+              if (primeValue >= k) return;
+
+              console.log("-- PRIME VALUE --", primeValue);
+
+              const updatedItems = map(newItems, (item, index) => {
+                if (item.props.number === primeValue) {
+                  return (
+                    <NumberContainer
+                      key={`Prime-${item.props.number}`}
+                      number={item.props.number}
+                      isPrime={true}
+                      colour={item.props.colour}
+                    />
+                  );
+                } else return item;
+              });
+
+              setItems(updatedItems);
             }
-            if (l < newItems.length && !newItems[l].key.includes("Marked")) {
-              console.log("l, prime: " + (l+1));
-              
-              const index = 2 * l + 2;
-              if (index < newItems.length) {
-                const primeNumber = newItems[index];
-                const primeNumberCopy = (
-                  <NumberContainer
-                    key={`Prime-${primeNumber.props.number}`}
-                    number={primeNumber.props.number}
-                    isPrime={true}
-                    colour={primeNumber.props.colour}
-                  />
-                );
-                newItems[index] = primeNumberCopy;
-              }
-            }
-            setItems(newItems);
             setL(l + 1);
           }
         }, 200);
@@ -141,7 +145,7 @@ function NumbersTable(props) {
   return (
     <div>
       <div className="NumbersTable">{items}</div>
-      <div>
+      <div className="NumbersTablePrimeNumberContainer">
         {map(primeNumbersArray, n => (
           <b className="NumbersTablePrimeNumber">{n}</b>
         ))}
