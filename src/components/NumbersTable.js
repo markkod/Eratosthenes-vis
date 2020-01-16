@@ -5,6 +5,7 @@ import { getArrayOfRange, ALGORITHMS, randomColour } from "../utils/range";
 import "../styles/NumbersTable.css";
 
 const MARKED_COLOUR = "#6bef9a";
+const PRIME_CALC_COLOUR = "#b69ae0";
 
 function NumbersTable(props) {
   const k = (props.rangeEnd - 2) / 2;
@@ -118,13 +119,23 @@ function NumbersTable(props) {
             if (l < newItems.length && newItems[l].props.colour !== MARKED_COLOUR) {
               const indexValue = newItems[l].props.number;
               const primeValue = 2 * indexValue + 1;
-              console.log(primeValue)
+
+              const calcPrimeItem = newItems[l]
+              const calcPrimeItemCopy = (
+                <NumberContainer
+                  key={calcPrimeItem.key}
+                  number={calcPrimeItem.props.number}
+                  isPrime={calcPrimeItem.props.isPrime}
+                  colour={PRIME_CALC_COLOUR}
+                   />
+              );
+              newItems[l] = calcPrimeItemCopy
+
               if (!sundaramPrimes.includes(primeValue)) {
                 sundaramPrimes.push(primeValue)
               }
-              console.log("-- PRIME VALUE --", primeValue);
               
-              const updatedItems = map(newItems, (item, index) => {
+              const updatedItems = map(newItems, (item, _) => {
                 if (item.props.number === primeValue) {
                   return (
                     <NumberContainer
