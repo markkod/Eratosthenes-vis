@@ -17,6 +17,7 @@ function NumbersTable(props) {
   const [items, setItems] = useState([]);
   const [p, setP] = useState(0);
   const [primeNumbersArray, setPrimeNumbersArray] = useState([]);
+  const [sundaramPrimes, setSundaramPrimes] = useState([]);
 
   const [i, setI] = useState(1);
   const [l, setL] = useState(0);
@@ -99,7 +100,9 @@ function NumbersTable(props) {
           const newItems = [...items];
           if (props.rangeEnd > 2) {
             const firstPrime = newItems[1];
-
+            if (!sundaramPrimes.includes(firstPrime.props.number)) {
+                sundaramPrimes.push(firstPrime.props.number)
+            }
             newItems[1] = (
               <NumberContainer
                 key={`Prime-${firstPrime.props.number}`}
@@ -112,14 +115,15 @@ function NumbersTable(props) {
           }
           if (l <= k) {
 
-            if (newItems[l].props.colour !== MARKED_COLOUR) {
+            if (l < newItems.length && newItems[l].props.colour !== MARKED_COLOUR) {
               const indexValue = newItems[l].props.number;
               const primeValue = 2 * indexValue + 1;
-
-              if (primeValue >= k) return;
-
+              console.log(primeValue)
+              if (!sundaramPrimes.includes(primeValue)) {
+                sundaramPrimes.push(primeValue)
+              }
               console.log("-- PRIME VALUE --", primeValue);
-
+              
               const updatedItems = map(newItems, (item, index) => {
                 if (item.props.number === primeValue) {
                   return (
@@ -132,7 +136,7 @@ function NumbersTable(props) {
                   );
                 } else return item;
               });
-
+              setSundaramPrimes([...sundaramPrimes])
               setItems(updatedItems);
             }
             setL(l + 1);
@@ -146,7 +150,11 @@ function NumbersTable(props) {
     <div>
       <div className="NumbersTable">{items}</div>
       <div className="NumbersTablePrimeNumberContainer">
-        {map(primeNumbersArray, n => (
+        {props.algorithmName === ALGORITHMS.SUNDARAM ?
+          map(sundaramPrimes, n => (
+            <b className="NumbersTablePrimeNumber">{n}</b>
+          ))
+        : map(primeNumbersArray, n => (
           <b className="NumbersTablePrimeNumber">{n}</b>
         ))}
       </div>
