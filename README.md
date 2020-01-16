@@ -1,3 +1,5 @@
+# Visualization of Sieve of Eratosthenes and Sieve of Sundaram
+
 Web application for Advanced Algorithmics course that visualizes the steps of Sieve of Eratosthenes and Sieve of Sundaram. 
 
 This application is hosted here: https://aparelo.github.io/Eratosthenes-vis/
