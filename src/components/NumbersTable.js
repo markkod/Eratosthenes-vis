@@ -4,12 +4,24 @@ import NumberContainer from "./NumberContainer";
 import { getArrayOfRange, ALGORITHMS, randomColour } from "../utils/range";
 import "../styles/NumbersTable.css";
 
+const MARKED_COLOUR = "#6bef9a";
+const PRIME_CALC_COLOUR = "#b69ae0";
+
 function NumbersTable(props) {
-  const range = getArrayOfRange(2, props.rangeEnd);
+  const k = (props.rangeEnd - 2) / 2;
+  const range = getArrayOfRange(
+    props.algorithmName === ALGORITHMS.SUNDARAM ? 1 : 2,
+    props.algorithmName === ALGORITHMS.SUNDARAM ? k : props.rangeEnd
+  );
+
   const [primeRange, setPrimeRange] = useState(range);
   const [items, setItems] = useState([]);
   const [p, setP] = useState(0);
   const [primeNumbersArray, setPrimeNumbersArray] = useState([]);
+  const [sundaramPrimes, setSundaramPrimes] = useState([]);
+
+  const [i, setI] = useState(1);
+  const [l, setL] = useState(0);
 
   useEffect(() => {
     const itemsCopy = [];
@@ -17,7 +29,7 @@ function NumbersTable(props) {
     map(range, value => {
       itemsCopy.push(
         <NumberContainer
-          key={`Initial-${value}`}
+          key={`Initial-${props.algorithmName}-${value}`}
           number={value}
           isPrime={false}
           colour={null}
@@ -62,17 +74,99 @@ function NumbersTable(props) {
           setItems(newItems);
           setPrimeRange(updatedPrimeRange);
           setP(newP);
-        }, 700);
+        }, 400);
+      }
+    } else if (props.algorithmName === ALGORITHMS.SUNDARAM) {
+      if (i <= k) {
+        setTimeout(() => {
+          const newItems = [...items];
+
+          for (var j = i; i + j + 2 * i * j <= k; j++) {
+            const itemToUpdate = newItems[i + j + 2 * i * j - 1];
+            newItems[i + j + 2 * i * j - 1] = (
+              <NumberContainer
+                key={`Marked-${itemToUpdate.props.number}`}
+                number={itemToUpdate.props.number}
+                isPrime={itemToUpdate.props.isPrime}
+                colour={MARKED_COLOUR}
+              />
+            );
+          }
+
+          setItems(newItems);
+          setI(i + 1);
+        }, 200);
+      } else {
+        setTimeout(() => {
+          const newItems = [...items];
+          if (props.rangeEnd > 2) {
+            const firstPrime = newItems[1];
+            if (!sundaramPrimes.includes(firstPrime.props.number)) {
+                sundaramPrimes.push(firstPrime.props.number)
+            }
+            newItems[1] = (
+              <NumberContainer
+                key={`Prime-${firstPrime.props.number}`}
+                number={firstPrime.props.number}
+                isPrime={true}
+                colour={firstPrime.props.colour}
+              />
+            );
+            setItems(newItems);
+          }
+          if (l <= k) {
+
+            if (l < newItems.length && newItems[l].props.colour !== MARKED_COLOUR) {
+              const indexValue = newItems[l].props.number;
+              const primeValue = 2 * indexValue + 1;
+
+              const calcPrimeItem = newItems[l]
+              const calcPrimeItemCopy = (
+                <NumberContainer
+                  key={calcPrimeItem.key}
+                  number={calcPrimeItem.props.number}
+                  isPrime={calcPrimeItem.props.isPrime}
+                  colour={PRIME_CALC_COLOUR}
+                   />
+              );
+              newItems[l] = calcPrimeItemCopy
+
+              if (!sundaramPrimes.includes(primeValue)) {
+                sundaramPrimes.push(primeValue)
+              }
+              
+              const updatedItems = map(newItems, (item, _) => {
+                if (item.props.number === primeValue) {
+                  return (
+                    <NumberContainer
+                      key={`Prime-${item.props.number}`}
+                      number={item.props.number}
+                      isPrime={true}
+                      colour={item.props.colour}
+                    />
+                  );
+                } else return item;
+              });
+              setSundaramPrimes([...sundaramPrimes])
+              setItems(updatedItems);
+            }
+            setL(l + 1);
+          }
+        }, 200);
       }
     }
-  }, [p]);
+  }, [p, i, l]);
 
   return (
     <div>
       <div className="NumbersTable">{items}</div>
-      <div>
-        {map(primeNumbersArray, n => (
-          <b className="NumbersTablePrimeNumber" >{n}</b>
+      <div className="NumbersTablePrimeNumberContainer">
+        {props.algorithmName === ALGORITHMS.SUNDARAM ?
+          map(sundaramPrimes, n => (
+            <b className="NumbersTablePrimeNumber">{n}</b>
+          ))
+        : map(primeNumbersArray, n => (
+          <b className="NumbersTablePrimeNumber">{n}</b>
         ))}
       </div>
     </div>

@@ -11,5 +11,5 @@ export const ALGORITHMS = {
 
 export const randomColour = () => {
   const rand = Math.random()
-  return "#000000".replace(/0/g,function(){return (~~(rand*16)).toString(16);})
+  return "#f00000".replace(/0/g,function(){return (~~(rand*16)).toString(16);})
 }
