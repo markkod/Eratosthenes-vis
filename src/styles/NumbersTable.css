@@ -13,3 +13,10 @@
 .NumbersTablePrimeNumber {
     margin-right: 10px;
 }
+
+.NumbersTablePrimeNumberContainer {
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    justify-content: center;
+}
